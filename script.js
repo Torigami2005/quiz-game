@@ -1,81 +1,199 @@
-// console.log("Hello, World!");
+const startScreen = document.getElementById("start-screen");
+const quizScreen = document.getElementById("quiz-screen");
+const resultScreen = document.getElementById("result-screen");
+const startButton = document.getElementById("start-btn");
+const questionText = document.getElementById("question-text");
+const answersContainer = document.getElementById("answers-container");
+const currectQuestionSpan = document.getElementById("current-question");
+const totalQuestionSpan = document.getElementById("total-questions");
+const scoreSpan = document.getElementById("score");
+const finalScoreSpan = document.getElementById("final-score");
+const maxScoreSpan = document.getElementById("max-score");
+const resultMessage = document.getElementById("result-message");
+const restartButton = document.getElementById("restart-btn");
+const progressBar = document.getElementById("progress");
 
-// const add = (a, b) => a + b;
-// console.log("2 + 3 =", add(2, 3));
+// Quiz Data
+const quizQuestions = [
+    {
+        question: "What is the capital of France?",
+        answers: [
+            { text: "Berlin", correct: false },
+            { text: "Madrid", correct: false },
+            { text: "Paris", correct: true },
+            { text: "Rome", correct: false }
+        ]
+    },
+    {
+        question: "Which planet is known as the Red Planet?",
+        answers: [
+            { text: "Earth", correct: false },
+            { text: "Mars", correct: true },
+            { text: "Jupiter", correct: false },
+            { text: "Saturn", correct: false }
+        ]
+    },
+    {
+        question: "What is the largest ocean on Earth?",
+        answers: [
+            { text: "Atlantic Ocean", correct: false },
+            { text: "Indian Ocean", correct: false },
+            { text: "Arctic Ocean", correct: false },
+            { text: "Pacific Ocean", correct: true }
+        ]
+    },
+    {
+        question: "Who wrote 'Romeo and Juliet'?",
+        answers: [
+            { text: "Charles Dickens", correct: false },
+            { text: "William Shakespeare", correct: true },
+            { text: "Mark Twain", correct: false },
+            { text: "Jane Austen", correct: false }
+        ]
+    },
+    {
+        question: "What is the chemical symbol for gold?",
+        answers: [
+            { text: "Au", correct: true },
+            { text: "Ag", correct: false },
+            { text: "Fe", correct: false },
+            { text: "Pb", correct: false }
+        ]
+    },
+    {
+        question: "Which country hosted the 2016 Summer Olympics?",
+        answers: [
+            { text: "China", correct: false },
+            { text: "Brazil", correct: true },
+            { text: "UK", correct: false },
+            { text: "Russia", correct: false }
+        ]
+    },
+    {
+        question: "What is the hardest natural substance on Earth?",
+        answers: [
+            { text: "Gold", correct: false },
+            { text: "Iron", correct: false },
+            { text: "Diamond", correct: true },
+            { text: "Silver", correct: false }
+        ]
+    },
+    {
+        question: "Who painted the Mona Lisa?",
+        answers: [
+            { text: "Vincent van Gogh", correct: false },
+            { text: "Pablo Picasso", correct: false },
+            { text: "Leonardo da Vinci", correct: true },
+            { text: "Claude Monet", correct: false }
+        ]
+    },
+    {
+        question: "Who Composed Sogno di Volare?",
+        answers: [
+            { text: "Christopher Tin", correct: true },
+            { text: "John Williams", correct: false },
+            { text: "Ennio Morricone", correct: false },
+            { text: "James Horner", correct: false }
+        ]
+    },
+    {
+        question: "Who created the game 'Civilization Series'?",
+        answers: [
+            { text: "Sid Meier", correct: true },
+            { text: "John Carmack", correct: false },
+            { text: "Shigeru Miyamoto", correct: false },
+            { text: "Will Wright", correct: false }
+        ]
+    }
+];
 
-// const multiply = (a, b) => a * b;
-// console.log("4 * 5 =", multiply(4, 5));
+let currentQuestionIndex = 0;
+let score = 0;
+let answersDisabled = false;
 
-// const greet = (name) => `Hello, ${name}!`;
-// console.log(greet("Alice"));
+totalQuestionSpan.textContent = quizQuestions.length;
+maxScoreSpan.textContent = quizQuestions.length;
 
-// const factorial = (n) => {
-//     if (n === 0) return 1;
-//     return n * factorial(n - 1);
-// }
-// console.log("5! =", factorial(5));
+startButton.addEventListener("click", startQuiz);
+restartButton.addEventListener("click", restartQuiz);
 
-// const fibonacci = (n) => {
-//     if (n <= 1) return n;
-//     return fibonacci(n - 1) + fibonacci(n - 2);
-// }
-// console.log("Fibonacci(6) =", fibonacci(6));
+function startQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    scoreSpan.textContent = 0;
+    currectQuestionSpan.textContent = 1;
 
-// const isEven = (n) => n % 2 === 0;
-// console.log("Is 4 even?", isEven(4));
-// console.log("Is 7 even?", isEven(7));
+    startScreen.classList.remove("active");
+    quizScreen.classList.add("active");
+    resultScreen.classList.remove("active");
 
-// const reverseString = (str) => str.split('').reverse().join('');
-// console.log("Reverse of 'JavaScript' is", reverseString("JavaScript"));
+    showQuestion();
+}
 
-// const square = (n) => n * n;
-// console.log("Square of 6 is", square(6));
+function showQuestion() {
+    answersDisabled = false;
+    const currentQuestion = quizQuestions[currentQuestionIndex];
 
-// const cube = (n) => n * n * n;
-// console.log("Cube of 3 is", cube(3));
+    const progressPercent =
+        ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+    progressBar.style.width = `${progressPercent}%`;
 
-// const power = (base, exp) => Math.pow(base, exp);
-// console.log("2 to the power of 4 is", power(2, 4));
+    questionText.textContent = currentQuestion.question;
+    answersContainer.innerHTML = "";
 
-// const max = (a, b) => (a > b ? a : b);
-// console.log("Max of 10 and 20 is", max(10, 20));
+    currentQuestion.answers.forEach((answer) => {
+        const button = document.createElement("button");
+        button.textContent = answer.text;
+        button.classList.add("answers-btn");
+        button.dataset.correct = answer.correct;
+        button.addEventListener("click", selectAnswer);
+        answersContainer.appendChild(button);
+    });
+}
 
-// const min = (a, b) => (a < b ? a : b);
-// console.log("Min of 10 and 20 is", min(10, 20));
+function selectAnswer(event) {
+    if (answersDisabled) return;
+    answersDisabled = true;
 
-// const average = (arr) => arr.reduce((sum, val) => sum + val, 0) / arr.length;
-// console.log("Average of [1, 2, 3, 4, 5] is", average([1, 2, 3, 4, 5]));
+    const selectedButton = event.target;
+    const isCorrect = selectedButton.dataset.correct === "true";
 
-// const isPrime = (n) => {
-//     if (n <= 1) return false;
-//     for (let i = 2; i <= Math.sqrt(n); i++) {
-//         if (n % i === 0) return false;
-//     }
-//     return true;
-// }
-// console.log("Is 11 prime?", isPrime(11));
-// console.log("Is 15 prime?", isPrime(15));
+    if (isCorrect) {
+        score++;
+        scoreSpan.textContent = score;
+    }
 
-// const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-// console.log("Capitalize 'hello':", capitalize("hello"));
+    Array.from(answersContainer.children).forEach((button) => {
+        button.classList.add(
+            button.dataset.correct === "true" ? "correct" : "incorrect"
+        );
+        button.disabled = true;
+    });
 
-// const flattenArray = (arr) => arr.reduce((flat, toFlatten) => flat.concat(Array.isArray(toFlatten) ? flattenArray(toFlatten) : toFlatten), []);
-// console.log("Flatten [1, [2, [3, 4], 5]]:", flattenArray([1, [2, [3, 4], 5]]));
+    setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizQuestions.length) {
+            currectQuestionSpan.textContent = currentQuestionIndex + 1;
+            showQuestion();
+        } else {
+            endQuiz();
+        }
+    }, 1000);
+}
 
-// const removeDuplicates = (arr) => [...new Set(arr)];
-// console.log("Remove duplicates from [1, 2, 2, 3, 4, 4, 5]:", removeDuplicates([1, 2, 2, 3, 4, 4, 5]));
+function endQuiz() {
+    quizScreen.classList.remove("active");
+    resultScreen.classList.add("active");
 
-// const sortArray = (arr) => arr.slice().sort((a, b) => a - b);
-// console.log("Sort [5, 3, 8, 1, 2]:", sortArray([5, 3, 8, 1, 2]));
+    finalScoreSpan.textContent = score;
 
-// console.log("All operations completed.");
+    resultMessage.textContent =
+        score / quizQuestions.length >= 0.7
+            ? "Congratulations! You passed the quiz."
+            : "Better luck next time!";
+}
 
-// // End of code
-
-// var x = 0;
-// var y = 1;
-
-// var z = x + y;
-// console.log("x + y =", z);
-
-
+function restartQuiz() {
+    resultScreen.classList.remove("active");
+    startScreen.classList.add("active");
+}

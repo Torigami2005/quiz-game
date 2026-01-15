@@ -60,13 +60,16 @@ body {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     line-height: 1.4;
+    color: #2c2c2c;
+    /* FIX: readable text */
 }
 
 .quiz-info {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
-    color: #8c00ff;
+    color: #4a007a;
+    /* FIX: darker text */
 }
 
 .answers-container {
@@ -74,4 +77,113 @@ body {
     flex-direction: column;
     gap: 10px;
     margin-bottom: 25px;
+}
+
+.answers-btn {
+    background-color: #e0e0e0;
+    color: #2b2b2b;
+    /* FIX: readable text */
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.answers-btn:hover {
+    background-color: #d4d4d4;
+    color: #1a1a1a;
+    /* FIX */
+}
+
+.answers-btn.correct {
+    background-color: #4caf50;
+    color: white;
+}
+
+.answers-btn.incorrect {
+    background-color: #f44336;
+    color: white;
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    height: 20px;
+    margin-bottom: 1rem;
+}
+
+.progress {
+    height: 100%;
+    background-color: #76c7c0;
+    width: 0%;
+    transition: width 0.3s;
+}
+
+/* RESULT SCREEN */
+
+#result-screen h1 {
+    color: #4a148c;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.result-info {
+    background: #f3e5f5;
+    margin-bottom: 2rem;
+    color: #6a1b9a;
+}
+
+.result-info p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+#result-message {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #412351;
+}
+
+button {
+    background-color: #760ed8;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #5a0bb3;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+    .screen {
+        padding: 1rem;
+    }
+
+    #start-screen h1 {
+        font-size: 2rem;
+    }
+
+    #question-text {
+        font-size: 1.2rem;
+    }
+
+    .answers-btn {
+        font-size: 0.9rem;
+    }
+
+    button {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
 }
