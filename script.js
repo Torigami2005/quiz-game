@@ -13,97 +13,82 @@ const resultMessage = document.getElementById("result-message");
 const restartButton = document.getElementById("restart-btn");
 const progressBar = document.getElementById("progress");
 
-// Quiz Data
+const videoButton = document.createElement("button");
+videoButton.textContent = "Watch Your Fate";
+videoButton.classList.add("video-btn");
+
 const quizQuestions = [
     {
-        question: "What is the capital of France?",
+        question: "When was Genshin Impact released?",
         answers: [
-            { text: "Berlin", correct: false },
-            { text: "Madrid", correct: false },
-            { text: "Paris", correct: true },
-            { text: "Rome", correct: false }
-        ]
+            { text: "2019", correct: false },
+            { text: "2020", correct: true },
+            { text: "2021", correct: false },
+            { text: "2018", correct: false },
+        ],
     },
     {
-        question: "Which planet is known as the Red Planet?",
+        question: "Which of these characters is NOT from Genshin Impact?",
         answers: [
-            { text: "Earth", correct: false },
-            { text: "Mars", correct: true },
-            { text: "Jupiter", correct: false },
-            { text: "Saturn", correct: false }
-        ]
+            { text: "Diluc", correct: false },
+            { text: "Venti", correct: false },
+            { text: "Zelda", correct: true },
+            { text: "Keqing", correct: false },
+        ],
     },
     {
-        question: "What is the largest ocean on Earth?",
+        question: "What is the name of the world in Genshin Impact?",
         answers: [
-            { text: "Atlantic Ocean", correct: false },
-            { text: "Indian Ocean", correct: false },
-            { text: "Arctic Ocean", correct: false },
-            { text: "Pacific Ocean", correct: true }
-        ]
+            { text: "Azeroth", correct: false },
+            { text: "Hyrule", correct: false },
+            { text: "Teyvat", correct: true },
+            { text: "Valoran", correct: false },
+        ],
     },
     {
-        question: "Who wrote 'Romeo and Juliet'?",
+        question: "Which element does the character 'Xiangling' use?",
         answers: [
-            { text: "Charles Dickens", correct: false },
-            { text: "William Shakespeare", correct: true },
-            { text: "Mark Twain", correct: false },
-            { text: "Jane Austen", correct: false }
-        ]
+            { text: "Pyro", correct: true },
+            { text: "Hydro", correct: false },
+            { text: "Electro", correct: false },
+            { text: "Anemo", correct: false },
+        ],
     },
     {
-        question: "What is the chemical symbol for gold?",
+        question: "Who is the archon of Nod-Krai?",
         answers: [
-            { text: "Au", correct: true },
-            { text: "Ag", correct: false },
-            { text: "Fe", correct: false },
-            { text: "Pb", correct: false }
-        ]
+            { text: "Zhongli", correct: false },
+            { text: "Venti", correct: false },
+            { text: "Columbina Hyposelenia", correct: true },
+            { text: "Barbatos", correct: false },
+        ],
     },
     {
-        question: "Which country hosted the 2016 Summer Olympics?",
+        question: "What is the back story of the artifact set 'Thundering Fury'?",
         answers: [
-            { text: "China", correct: false },
-            { text: "Brazil", correct: true },
-            { text: "UK", correct: false },
-            { text: "Russia", correct: false }
-        ]
+            { text: "A tale of a storm that never ends", correct: false },
+            { text: "A story of a warrior who tamed lightning", correct: false },
+            { text: "A legend of a pact made with the Electro Archon", correct: true },
+            { text: "A myth about a lost city of thunder", correct: false },
+        ],
     },
     {
-        question: "What is the hardest natural substance on Earth?",
+        question: "Who is the first 5 banner character that was released in Genshin Impact?",
         answers: [
-            { text: "Gold", correct: false },
-            { text: "Iron", correct: false },
-            { text: "Diamond", correct: true },
-            { text: "Silver", correct: false }
-        ]
+            { text: "Diluc", correct: true },
+            { text: "Jean", correct: false },
+            { text: "Amber", correct: false },
+            { text: "Bennett", correct: false },
+        ],
     },
     {
-        question: "Who painted the Mona Lisa?",
+        question: "What do you call players that plays Genshin Impact update ver 1.0?",
         answers: [
-            { text: "Vincent van Gogh", correct: false },
-            { text: "Pablo Picasso", correct: false },
-            { text: "Leonardo da Vinci", correct: true },
-            { text: "Claude Monet", correct: false }
-        ]
-    },
-    {
-        question: "Who Composed Sogno di Volare?",
-        answers: [
-            { text: "Christopher Tin", correct: true },
-            { text: "John Williams", correct: false },
-            { text: "Ennio Morricone", correct: false },
-            { text: "James Horner", correct: false }
-        ]
-    },
-    {
-        question: "Who created the game 'Civilization Series'?",
-        answers: [
-            { text: "Sid Meier", correct: true },
-            { text: "John Carmack", correct: false },
-            { text: "Shigeru Miyamoto", correct: false },
-            { text: "Will Wright", correct: false }
-        ]
+            { text: "Fetus", correct: false },
+            { text: "OGs", correct: true },
+            { text: "NewGen", correct: false },
+            { text: "Glazers", correct: false },
+        ],
     }
 ];
 
@@ -187,10 +172,24 @@ function endQuiz() {
 
     finalScoreSpan.textContent = score;
 
+    const scoreRatio = score / quizQuestions.length;
+
     resultMessage.textContent =
-        score / quizQuestions.length >= 0.7
-            ? "Congratulations! You passed the quiz."
-            : "Better luck next time!";
+        scoreRatio >= 0.7
+            ? "Okay nerd. You know your genshin."
+            : "Loser glazer. sucks to be f2p.";
+
+    videoButton.onclick = () => {
+        if (scoreRatio >= 0.7) {
+            window.location.href = "columbina.mp4";
+        } else {
+            window.location.href = "qiqi.mp4";
+        }
+    };
+
+    if (!resultScreen.contains(videoButton)) {
+        resultScreen.appendChild(videoButton);
+    }
 }
 
 function restartQuiz() {

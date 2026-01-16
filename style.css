@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/hywenhei');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,20 +7,22 @@
 }
 
 body {
-    background: #a7d3ef;
+    background-image: url(/nodkrai.png);
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 1rem;
-    font-family: Monocraft;
+    font-family: 'HYWenHei', sans-serif;
+    
 }
 
 .container {
     background-color: #fff;
     border-radius: 1rem;
     box-shadow: 0px 0px 100px rgba(163, 228, 14, 0.7);
-    width: 100%;
+    width: 50%;
     min-width: 600px;
     overflow: hidden;
     position: relative;
@@ -69,7 +73,6 @@ body {
     justify-content: space-between;
     margin-bottom: 1rem;
     color: #4a007a;
-    /* FIX: darker text */
 }
 
 .answers-container {
@@ -82,19 +85,18 @@ body {
 .answers-btn {
     background-color: #e0e0e0;
     color: #2b2b2b;
-    /* FIX: readable text */
     border: none;
     border-radius: 0.5rem;
     padding: 0.75rem 1rem;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-family: 'HYWenHei', sans-serif;
 }
 
 .answers-btn:hover {
     background-color: #d4d4d4;
     color: #1a1a1a;
-    /* FIX */
 }
 
 .answers-btn.correct {
@@ -157,6 +159,8 @@ button {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-family: 'HYWenHei', sans-serif;
+
 }
 
 button:hover {
@@ -166,6 +170,16 @@ button:hover {
 /* RESPONSIVE */
 
 @media (max-width: 700px) {
+    .container {
+        width: 90%;
+        min-width: unset;
+    }
+
+    body {
+        background-size: cover;
+        background-position: center;
+    }
+
     .screen {
         padding: 1rem;
     }
