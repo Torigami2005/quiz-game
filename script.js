@@ -89,6 +89,24 @@ const quizQuestions = [
             { text: "NewGen", correct: false },
             { text: "Glazers", correct: false },
         ],
+    },
+    {
+        question: "What do you call Genshin Impact lovers?",
+        answers: [
+            { text: "Gamers", correct: false },
+            { text: "Nerds", correct: false },
+            { text: "Weebs", correct: false },
+            { text: "Glazers", correct: false },
+        ],
+    },
+    {
+        question: "What do you call players who plays Genshin Impact but never take a bath?",
+        answers: [
+            { text: "Glazers", correct: false },
+            { text: "Stinky Bastards", correct: false },
+            { text: "Bathless Glazers", correct: true },
+            { text: "Nerds", correct: false },
+        ],
     }
 ];
 
