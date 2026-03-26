@@ -96,7 +96,7 @@ const quizQuestions = [
             { text: "Gamers", correct: false },
             { text: "Nerds", correct: false },
             { text: "Weebs", correct: false },
-            { text: "Glazers", correct: false },
+            { text: "Glazers", correct: true },
         ],
     },
     {
